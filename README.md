@@ -4,7 +4,13 @@ This example shows how to run embedding searches using OpenAI and Pgai.
 
 ## Getting Started
 
-When you open this project in IDX, your environment will be set up and the web application will run automatically.
+Create a Python virtual environment and install the required libraries:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
 
 Create a `.env` file and configure the following environment variables:
 
@@ -74,4 +80,4 @@ The final step is to index the `embedding` column using the pgvector HNSW (Hiera
 create index on cnn_daily_mail using hnsw (embedding vector_cosine_ops);
 ```
 
-At this point, you are ready to start using the web interface to run full text and embedding searches.
+At this point, you are ready to start using the web interface to run full text and embedding searches. You can run the web interface by executing the `devserver.sh` script.
