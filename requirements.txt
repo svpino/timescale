@@ -1,0 +1,9 @@
+# Dev environment
+pip
+autopep8
+
+# App
+flask
+datasets 
+psycopg[binary]
+python-dotenv

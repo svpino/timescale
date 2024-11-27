@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hello World</title>
+    <style>
+      #search_results {
+        padding: 20px;
+        margin-top: 10px;
+      } 
+
+      #search_results table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      #search_results th, #search_results td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+
+      #search_results tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+    </style>
+    <script>
+      function search(route) {
+        fetch(route)
+          .then((response) => response.json())
+          .then(data => {
+            const resultsDiv = document.getElementById('search_results');
+            resultsDiv.innerHTML = ''; // Clear previous results
+            
+            const table = document.createElement('table');
+            const headerRow = table.insertRow();
+            const headerCell = headerRow.insertCell();
+            headerCell.textContent = 'ID';
+            const headerCellArticle = headerRow.insertCell();
+            headerCellArticle.textContent = 'Article';
+            
+            if (data && data.results && Array.isArray(data.results)) {
+              data.results.forEach(result => {
+                const row = table.insertRow();
+                const cell = row.insertCell();
+                cell.textContent = result.id;
+                const cellArticle = row.insertCell();
+                cellArticle.textContent = result.article;
+              });
+            }
+            
+            resultsDiv.appendChild(table);
+          });
+      }
+    </script>
+  </head>
+
+  <body>
+    <h1>pgai is cool!</h1>
+    <button onclick="search('/full_text_search')">Run Full Text Search</button>
+    <button onclick="search('/embedding_search')">Run Embedding Search</button>
+    
+    <div id="search_results">
+    </div>
+
+  </body>
+</html>
